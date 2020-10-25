@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Grupee</string>
+    <string name="hello_alex">Hello Alex!!</string>
+    <string name="textview">TextView</string>
+    <string name="button">Button</string>
+    <string name="name">Name</string>
+    <string name="your_name">Your Name?</string>
+    <string name="register">Register</string>
+    <string name="taptoregister">taptoregister</string>
+</resources>
