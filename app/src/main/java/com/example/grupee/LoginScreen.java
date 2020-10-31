@@ -3,8 +3,10 @@ package com.example.grupee;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -14,9 +16,9 @@ import android.widget.ImageButton;
 
 public class LoginScreen extends AppCompatActivity {
 
-    EditText usernameField, passwordField;
-    ImageButton eyeToggle;
-    Button login, loginWithFacebookBtn;
+    public EditText usernameField, passwordField;
+    private ImageButton eyeToggle;
+    private Button login, loginWithFacebookBtn;
 
     boolean passShow = true;
 
@@ -31,7 +33,7 @@ public class LoginScreen extends AppCompatActivity {
         login = findViewById(R.id.login_btn);
         loginWithFacebookBtn = findViewById(R.id.facebook_login_btn);
 
-        eyeToggle.setOnClickListener(new View.OnClickListener(){ //buton eyeToggle TODO: verificat functionalitate cand apesi pe el, nu merge neaparat ok
+        eyeToggle.setOnClickListener(new View.OnClickListener(){ //buton eyeToggle TODO: verificat functionalitate cand apesi pe el, nu merge ok la prima apasare
             @Override
             public void onClick(View v) {
                 if(passShow){
@@ -69,19 +71,57 @@ public class LoginScreen extends AppCompatActivity {
 
         usernameField.addTextChangedListener(new TextWatcher() {  //culoare buton login in functie de completarea campurilor
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(!TextUtils.isEmpty(passwordField.getText()) && !TextUtils.isEmpty(s)){
+                    login.setEnabled(true);
+                    login.setClickable(true);
+                    login.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    login.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_bg_active));
+                }else{
+                    login.setEnabled(false);
+                    login.setClickable(false);
+                    login.setTextColor(getResources().getColor(R.color.grey));
+                    login.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_bg));
+                }
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
+
+
+        passwordField.addTextChangedListener(new TextWatcher() {  //culoare buton login in functie de completarea campurilor
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(usernameField.getText()) && !TextUtils.isEmpty(s)){
+                    login.setEnabled(true);
+                    login.setClickable(true);
+                    login.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    login.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_bg_active));
+                }else{
+                    login.setEnabled(false);
+                    login.setClickable(false);
+                    login.setTextColor(getResources().getColor(R.color.grey));
+                    login.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.btn_bg));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent loginOrRegister = new Intent(LoginScreen.this, LoginOrRegister.class);
+        startActivity(loginOrRegister);
+        finish();
+        //super.onBackPressed();
     }
 }

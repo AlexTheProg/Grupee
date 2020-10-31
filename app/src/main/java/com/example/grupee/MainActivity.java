@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(MainActivity.this,LoginScreen.class);
+                Intent mainIntent = new Intent(MainActivity.this,LoginOrRegister.class);
                 startActivity(mainIntent);
                 finish();
             }
