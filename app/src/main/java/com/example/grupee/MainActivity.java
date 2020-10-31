@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_TIMER = 4000;
+    private final int SPLASH_DISPLAY_TIMER = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
