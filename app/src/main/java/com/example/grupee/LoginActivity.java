@@ -14,9 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    public EditText usernameField, passwordField;
+    private EditText usernameField, passwordField;
     private ImageButton eyeToggle;
     private Button login, loginWithFacebookBtn;
 
@@ -33,7 +33,7 @@ public class LoginScreen extends AppCompatActivity {
         login = findViewById(R.id.login_btn);
         loginWithFacebookBtn = findViewById(R.id.facebook_login_btn);
 
-        eyeToggle.setOnClickListener(new View.OnClickListener(){ //buton eyeToggle TODO: verificat functionalitate cand apesi pe el, nu merge ok la prima apasare
+        eyeToggle.setOnClickListener(new View.OnClickListener(){ //buton eyeToggle DONE: verificat functionalitate cand apesi pe el, nu merge ok la prima apasare, cursorul de text nu salveaza pozitia si se reteaza pe poz [0]
             @Override
             public void onClick(View v) {
                 if(passShow){
@@ -68,6 +68,7 @@ public class LoginScreen extends AppCompatActivity {
                 }
             }
         });
+
 
         usernameField.addTextChangedListener(new TextWatcher() {  //culoare buton login in functie de completarea campurilor
             @Override
@@ -119,7 +120,7 @@ public class LoginScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent loginOrRegister = new Intent(LoginScreen.this, LoginOrRegister.class);
+        Intent loginOrRegister = new Intent(LoginActivity.this, LoginOrRegisterActivity.class);
         startActivity(loginOrRegister);
         finish();
         //super.onBackPressed();
