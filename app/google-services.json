@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "568150257631",
+    "firebase_url": "https://licenta-grupee-app.firebaseio.com",
+    "project_id": "licenta-grupee-app",
+    "storage_bucket": "licenta-grupee-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568150257631:android:18c7088dd2c0bdb8e71e6a",
+        "android_client_info": {
+          "package_name": "com.example.grupee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568150257631-i70tjrqq6v5986poj63lt7ms0rkj6brq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXUk_7mAVu0D-34r0joeI3El-dSlQY1SM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568150257631-i70tjrqq6v5986poj63lt7ms0rkj6brq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameField = findViewById(R.id.username_edit_text);
         passwordField = findViewById(R.id.password_edit_text);
         eyeToggle = findViewById(R.id.password_toggle);
-        login = findViewById(R.id.login_btn);
+        login = findViewById(R.id.register_user);
         loginWithFacebookBtn = findViewById(R.id.facebook_login_btn);
 
         eyeToggle.setOnClickListener(new View.OnClickListener(){ //buton eyeToggle DONE: verificat functionalitate cand apesi pe el, nu merge ok la prima apasare, cursorul de text nu salveaza pozitia si se reteaza pe poz [0]
@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     eyeToggle.setImageResource(R.drawable.ic_baseline_visibility_24);
                     passwordField.setTransformationMethod(null);
                 }
+                passwordField.setSelection(passwordField.getText().length());
             }
         });
 

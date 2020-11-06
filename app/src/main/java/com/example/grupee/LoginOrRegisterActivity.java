@@ -17,7 +17,7 @@ public class LoginOrRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_or_register);
 
-        loginButton = findViewById(R.id.login_btn);
+        loginButton = findViewById(R.id.register_user);
         registerButton = findViewById(R.id.register_btn);
 
         loginButton.setOnClickListener(new View.OnClickListener(){
