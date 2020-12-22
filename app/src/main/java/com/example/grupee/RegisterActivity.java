@@ -263,8 +263,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(RegisterActivity.this, "User has registered successfully", Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.GONE);
+                                    }else{
+                                        Toast.makeText(RegisterActivity.this, "Registration has failed", Toast.LENGTH_LONG).show();
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
                         }

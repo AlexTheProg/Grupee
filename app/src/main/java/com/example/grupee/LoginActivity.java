@@ -1,5 +1,6 @@
 package com.example.grupee;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -13,12 +14,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameField, passwordField;
     private ImageButton eyeToggle;
     private Button login, loginWithFacebookBtn;
+
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+    boolean loggedIn;
 
     boolean passShow = true;
 
@@ -27,11 +39,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+        mAuth = FirebaseAuth.getInstance();
+
         usernameField = findViewById(R.id.username_edit_text);
         passwordField = findViewById(R.id.password_edit_text);
         eyeToggle = findViewById(R.id.password_toggle);
         login = findViewById(R.id.register_user);
         loginWithFacebookBtn = findViewById(R.id.facebook_login_btn);
+        progressBar = findViewById(R.id.progressBar2);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userLogin();
+            }
+        });
 
         eyeToggle.setOnClickListener(new View.OnClickListener(){ //buton eyeToggle DONE: verificat functionalitate cand apesi pe el, nu merge ok la prima apasare, cursorul de text nu salveaza pozitia si se reteaza pe poz [0]
             @Override
@@ -126,4 +148,38 @@ public class LoginActivity extends AppCompatActivity {
         finish();
         //super.onBackPressed();
     }
+
+    private void userLogin(){
+        String username = usernameField.getText().toString().trim();
+        String password = passwordField.getText().toString().trim();
+
+        if(username.isEmpty()){
+            usernameField.setError("Username is required");
+            usernameField.requestFocus();
+        }
+
+        if(password.isEmpty()){
+            passwordField.setError("Password is required");
+            passwordField.requestFocus();
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+        login.setVisibility(View.INVISIBLE);
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    //redirect user prof
+                    startActivity(new Intent(LoginActivity.this, LoggedHomeActivity.class));
+                    progressBar.setVisibility(View.INVISIBLE);
+                }else{
+                    Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    login.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+    }
+
 }

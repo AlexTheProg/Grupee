@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Username"
+        android:text="Email"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -74,23 +74,39 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_visibility_24" />
 
-
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/register_user"
+        <Button
+            android:id="@+id/register_user"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@id/password_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/btn_bg"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:text="@string/login"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_below="@id/password_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/btn_bg"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:text="@string/login"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/register_user"
+        android:layout_alignTop="@+id/register_user"
+        android:layout_alignEnd="@+id/register_user"
+        android:layout_alignBottom="@+id/register_user"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="2dp"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/facebook_login_btn"
@@ -115,6 +131,7 @@
         android:layout_marginTop="2dp"
         android:src="@mipmap/white_logo_transparent_background"
         android:contentDescription="@string/todo" />
+
 
 
 </RelativeLayout>
