@@ -1,4 +1,4 @@
-package com.example.grupee;
+package com.example.grupee.oldPack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.grupee.R;
+import com.example.grupee.view.LoginRegisterFragment;
 
 public class LoginOrRegisterActivity extends AppCompatActivity {
 
@@ -36,7 +39,7 @@ public class LoginOrRegisterActivity extends AppCompatActivity {
     }
 
     public void openLoginActivity(){
-        Intent loginIntent = new Intent(LoginOrRegisterActivity.this, LoginActivity.class);
+        Intent loginIntent = new Intent(LoginOrRegisterActivity.this, LoginRegisterFragment.class);
         startActivity(loginIntent);
         finish();
     }

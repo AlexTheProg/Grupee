@@ -1,4 +1,4 @@
-package com.example.grupee;
+package com.example.grupee.model;
 
 public class User {
     public String username, email;

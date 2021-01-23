@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".LoginOrRegisterActivity">
+    tools:context=".oldPack.LoginOrRegisterActivity">
+
+
 
 
     <Button
@@ -40,7 +42,13 @@
         android:textStyle="bold"
 />
 
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph1" />
 
 
 
