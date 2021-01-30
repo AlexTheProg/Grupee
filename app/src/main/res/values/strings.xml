@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Grupee</string>
+    <string name="notification_channel_name">Music Channel</string>
+    <string name="notification_channel_desc">Shows currently playing music</string>
     <string name="hello_alex">Hello Alex!!</string>
     <string name="textview">TextView</string>
     <string name="button">Button</string>
