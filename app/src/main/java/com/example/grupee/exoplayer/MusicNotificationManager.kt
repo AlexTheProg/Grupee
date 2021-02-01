@@ -3,6 +3,7 @@ package com.example.grupee.exoplayer
 import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import com.bumptech.glide.Glide
@@ -60,13 +61,21 @@ class MusicNotificationManager(
             return mediaController.metadata.description.subtitle.toString()
         }
 
-        override fun getCurrentLargeIcon(player: Player, callback: PlayerNotificationManager.BitmapCallback): Bitmap? {
+        override fun getCurrentLargeIcon(
+                player: Player,
+                callback: PlayerNotificationManager.BitmapCallback
+        ): Bitmap? {
             Glide.with(context).asBitmap()
                     .load(mediaController.metadata.description.iconUri)
-                    .into(object: CustomTarget<Bitmap>(){
-                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(
+                                resource: Bitmap,
+                                transition: Transition<in Bitmap>?
+                        ) {
                             callback.onBitmap(resource)
                         }
+
+                        override fun onLoadCleared(placeholder: Drawable?) = Unit
                     })
             return null
         }

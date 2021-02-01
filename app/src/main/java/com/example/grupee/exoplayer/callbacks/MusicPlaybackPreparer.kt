@@ -29,14 +29,13 @@ class MusicPlaybackPreparer(
     @InternalCoroutinesApi
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
         firebaseMusicSource.whenReady {
-            val itemToPlay = firebaseMusicSource.songs.find{ mediaId == it.description.mediaId}
-                playerPrepared(itemToPlay)
+            val itemToPlay = firebaseMusicSource.songs.find { mediaId == it.description.mediaId }
+            playerPrepared(itemToPlay)
+        }
     }
 
     override fun onPrepareFromSearch(query: String, playWhenReady: Boolean, extras: Bundle?) = Unit
 
     override fun onPrepareFromUri(uri: Uri, playWhenReady: Boolean, extras: Bundle?) = Unit
-
-
 }
-}
+
