@@ -1,7 +1,8 @@
-package com.example.grupee
+package com.example.grupee.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.grupee.R
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right)
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
 
 }
