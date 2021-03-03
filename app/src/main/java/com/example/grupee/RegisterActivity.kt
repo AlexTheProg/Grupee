@@ -1,4 +1,4 @@
-package com.example.grupee.views
+package com.example.grupee
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

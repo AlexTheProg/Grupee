@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph1"
-    app:startDestination="@id/loginRegisterFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
     <fragment
-        android:id="@+id/loginRegisterFragment"
-        android:name="com.example.grupee.view.LoginRegisterFragment"
-        android:label="LoginRegisterFragment" >
-        <action
-            android:id="@+id/action_loginRegisterFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_loginRegisterFragment_to_loginFragment2"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
-    </fragment>
+        android:id="@+id/homeFragment"
+        android:name="com.example.grupee.ui.fragments.HomeFragment"
+        android:label="HomeFragment" />
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.grupee.view.LoginFragment"
-        android:label="LoginFragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_loginRegisterFragment"
-            app:destination="@id/loginRegisterFragment" />
-    </fragment>
+        android:id="@+id/songFragment"
+        android:name="com.example.grupee.ui.fragments.SongFragment"
+        android:label="SongFragment" />
+
+    <action android:id="@+id/globalActionToSongFragment"
+        app:destination="@id/songFragment" />
 </navigation>
