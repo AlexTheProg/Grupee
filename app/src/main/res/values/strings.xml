@@ -2,5 +2,8 @@
     <string name="app_name">SpotifyCloneYT</string>
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_desc">Shows the currently playing music</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
     <string name="_00_00">00:00</string>
+    <string name="username">Username</string>
 </resources>
