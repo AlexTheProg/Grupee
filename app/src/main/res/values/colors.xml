@@ -41,6 +41,7 @@
     <color name="culoarePrimary">#3F51B5</color>
     <color name="culoarePrimaryDark">#3F51B5</color>
     <color name="culoareAccent">#F44336</color>
+    <color name="culoareSeekbar">#424242</color>
     <color name="culoarePrimaryText">#212121</color>
     <color name="culoareSecondaryText">#757575</color>
     <color name="Alb">#FFFFFF</color>

@@ -77,8 +77,13 @@ class SongFragment : Fragment(R.layout.fragment_song) {
     }
 
     private fun updateTitleAndSongImage(song: Song) {
-        val title = "${song.title} - ${song.artist}"
-        tvSongName.text = title
+        val artistName = song.artist
+        val songName = song.title
+        /*val title = "${song.title} - ${song.artist}"
+        tvSongName.text = title*/
+        tvArtistName.text = artistName
+        tvSongName.text = songName
+
         glide.load(song.imageURL).into(ivSongImage)
     }
 
