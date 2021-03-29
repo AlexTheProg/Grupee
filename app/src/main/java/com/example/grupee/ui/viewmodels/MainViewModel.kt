@@ -2,10 +2,13 @@ package com.example.grupee.ui.viewmodels
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat.METADATA_KEY_MEDIA_ID
+import android.view.View
+import android.widget.ImageButton
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.grupee.R
 
 import com.example.grupee.exoplayer.MusicServiceConnection
 import com.example.grupee.exoplayer.isPlayEnabled
@@ -26,6 +29,7 @@ class MainViewModel @ViewModelInject constructor(
     val networkError = musicServiceConnection.networkError
     val curPlayingSong = musicServiceConnection.curPlayingSong
     val playbackState = musicServiceConnection.playbackState
+    private var liked: Boolean = true
 
     init {
         _mediaItems.postValue(Resource.loading(null))
@@ -59,6 +63,16 @@ class MainViewModel @ViewModelInject constructor(
 
     fun seekTo(pos: Long) {
         musicServiceConnection.transportControls.seekTo(pos)
+    }
+
+    fun likeSong(view: ImageButton){
+        liked = if(liked){
+            view.setImageResource(R.drawable.ic_favorite_liked)
+            false
+        }else{
+            view.setImageResource(R.drawable.ic_favorite_unliked)
+            true
+        }
     }
 
     fun playOrToggleSong(mediaItem: Song, toggle: Boolean = false) {

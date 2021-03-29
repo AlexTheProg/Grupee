@@ -108,6 +108,8 @@ dependencies {
     // Firebase Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
+    implementation 'com.jackandphantom.android:androidlikebutton:1.2.0'
+
     // ExoPlayer
     api "com.google.android.exoplayer:exoplayer-core:2.11.8"
     api "com.google.android.exoplayer:exoplayer-ui:2.11.8"

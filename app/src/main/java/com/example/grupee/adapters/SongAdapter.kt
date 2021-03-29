@@ -6,9 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
 import com.example.grupee.R
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.lang.System.load
+import java.util.ServiceLoader.load
 import javax.inject.Inject
 
 class SongAdapter @Inject constructor(
@@ -22,7 +26,9 @@ class SongAdapter @Inject constructor(
         holder.itemView.apply {
             tvPrimary.text = song.title
             tvSecondary.text = song.artist
-            glide.load(song.imageURL).into(ivItemImage)
+            glide
+                    .load(song.imageURL)
+                    .into(ivItemImage)
 
             setOnClickListener {
                 onItemClickListener?.let { click ->

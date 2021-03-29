@@ -48,4 +48,5 @@
     <color name="culoareBack">#F3F3F3</color>
     <color name="culoareStroke">#BDBDBD</color>
     <color name="culoareHint">#ECECEC</color>
+    <color name="culoareLikeButton">#DC143C</color>
 </resources>

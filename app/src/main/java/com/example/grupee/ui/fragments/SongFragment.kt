@@ -1,6 +1,7 @@
 package com.example.grupee.ui.fragments
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
@@ -36,6 +37,8 @@ class SongFragment : Fragment(R.layout.fragment_song) {
     private var playbackState: PlaybackStateCompat? = null
 
     private var shouldUpdateSeekbar = true
+
+    private var liked: Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,6 +77,11 @@ class SongFragment : Fragment(R.layout.fragment_song) {
         ivSkip.setOnClickListener {
             mainViewModel.skipToNextSong()
         }
+
+
+        likeButton.setOnClickListener {
+            mainViewModel.likeSong(likeButton)
+        }
     }
 
     private fun updateTitleAndSongImage(song: Song) {
@@ -89,7 +97,7 @@ class SongFragment : Fragment(R.layout.fragment_song) {
 
     private fun subscribeToObservers() {
         mainViewModel.mediaItems.observe(viewLifecycleOwner) {
-            it?.let { result ->
+            it.let { result ->
                 when(result.status) {
                     Status.SUCCESS -> {
                         result.data?.let { songs ->

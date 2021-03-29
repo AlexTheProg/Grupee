@@ -9,4 +9,5 @@
     <string name="lyrics">Lyrics</string>
     <string name="artist_name">Artist Name</string>
     <string name="song_name">Song Name</string>
+    <string name="already_nhave_an_naccount">Already \nhave an \nAccount?</string>
 </resources>

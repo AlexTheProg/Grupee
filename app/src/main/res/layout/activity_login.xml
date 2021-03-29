@@ -39,48 +39,52 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_register_hero" />
+                    android:src="@drawable/ic_grupee_logo" />
             </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
-                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
                     android:id="@+id/editTextEmail"
-                    style="@style/Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blackColorSurface"
                     android:hint="@string/username"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textColor="@color/culoarePrimaryText" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
-                style="@style/parent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
                     android:id="@+id/editTextPassword"
-                    style="@style/Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blackColorSurface"
+
+                    android:textColor="@color/culoarePrimaryText"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                style="@style/viewParent"
+
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:text="Forgot Password?"
                 android:textColor="@color/darkTextColor"
-                android:textSize="@dimen/newsMoreTextSize" />
+                android:textSize="@dimen/newsMoreTextSize"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                />
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/cirLoginButton"

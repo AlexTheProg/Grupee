@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_register_refactored)
         changeStatusBarColor()
 
         cirRegisterButton.setOnClickListener{
@@ -103,6 +103,14 @@ class RegisterActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = Color.TRANSPARENT
         window.statusBarColor = resources.getColor(R.color.register_bk_color)
+    }
+
+    override fun onBackPressed() {
+        val intent =
+                Intent(this@RegisterActivity, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right)
+        finish()
     }
 
     fun onLoginClick(view: View?) {

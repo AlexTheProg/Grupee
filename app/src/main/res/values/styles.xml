@@ -4,32 +4,14 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/darkColorPrimary</item>
         <item name="colorAccent">@color/darkColorSurface</item>
-        <item name="android:textViewStyle">@style/PoppinsTextStyle</item>
-        <item name="materialButtonStyle">@style/ButtonStyle</item>
-        <item name="textInputStyle">@style/EditTextStyle</item>
+
     </style>
 
-    <style name="EditTextStyle" parent="Widget.Design.TextInputLayout">
-        <item name="backgroundTint">@android:color/white</item>
-        <item name="cornerRadius">16dp</item>
-        <item name="background">@color/darkColorSurface</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:backgroundTint">@color/darkColorSurface</item>
-    </style>
 
-    <style name="PlayButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">100dp</item>
-    </style>
 
-    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="fontFamily">@font/poppins_medium</item>
-        <item name="cornerRadius">25dp</item>
-    </style>
-
-    <style name="PoppinsTextStyle" parent="android:Widget.TextView">
-        <item name="fontFamily">@font/poppins_regular</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
+<style name="TextFieldsForms" parent="Widget.AppCompat.EditText">
+    <item name="android:textColor">@color/darkTextColor</item>
+</style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
