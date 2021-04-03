@@ -6,6 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+
+
+    <TextView
+        android:id="@+id/sectionTitle"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/navigationIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        android:padding="@dimen/padding_large"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:text="Songs"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <ImageButton
+        android:id="@+id/navigationIcon"
+        android:backgroundTint="#000"
+        app:layout_constraintBottom_toBottomOf="@id/sectionTitle"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toRightOf="@+id/sectionTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sectionTitle"
+        app:srcCompat="@drawable/ic_nav"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <Button
+        android:id="@+id/playButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:background="@drawable/accent_round_corner"
+        android:drawableStart="@drawable/ic_play_white"
+        android:drawablePadding="@dimen/padding_large"
+        android:minHeight="0dp"
+        android:paddingLeft="@dimen/padding_xx_large"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_xx_large"
+        android:paddingBottom="@dimen/padding_small"
+        android:text="Play"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_x_small"
+
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigationIcon" />
+
     <ProgressBar
         android:id="@+id/allSongsProgressBar"
         android:layout_width="wrap_content"
@@ -20,11 +73,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAllSongs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

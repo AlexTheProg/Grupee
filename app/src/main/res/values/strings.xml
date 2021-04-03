@@ -10,4 +10,8 @@
     <string name="artist_name">Artist Name</string>
     <string name="song_name">Song Name</string>
     <string name="already_nhave_an_naccount">Already \nhave an \nAccount?</string>
+    <string name="liked_songs">Liked Songs</string>
+    <string name="songs">Songs</string>
+    <string name="playlists">Playlists</string>
+    <string name="search">Search</string>
 </resources>

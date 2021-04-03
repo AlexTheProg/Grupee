@@ -68,9 +68,18 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.songFragment -> hideBottomBar()
-                R.id.homeFragment -> showBottomBar()
-                else -> showBottomBar()
+
+                R.id.songFragment -> {
+                    hideBottomBar()
+                    hideNavBar()
+                }
+                R.id.homeFragment -> {
+                        showBottomBar()
+                        showNavBar()}
+                else -> {
+                    showBottomBar()
+                    showNavBar()
+                }
             }
         }
     }
@@ -79,6 +88,14 @@ class MainActivity : AppCompatActivity() {
         ivCurSongImage.isVisible = false
         vpSong.isVisible = false
         ivPlayPause.isVisible = false
+    }
+
+    private fun hideNavBar(){
+        navigationBar.isVisible = false
+    }
+
+    private fun showNavBar(){
+        navigationBar.isVisible = true
     }
 
     private fun showBottomBar() {

@@ -14,6 +14,9 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.cirRegisterButton
+import kotlinx.android.synthetic.main.activity_register.editTextEmail
+import kotlinx.android.synthetic.main.activity_register_refactored.*
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +26,7 @@ class RegisterActivity : AppCompatActivity() {
 
         cirRegisterButton.setOnClickListener{
             when{
-                TextUtils.isEmpty(editTextEmail.text.toString().trim{it <= ' '}) -> {
+                TextUtils.isEmpty(editTextEmailRegister.text.toString().trim{it <= ' '}) -> {
                     Toast.makeText(
                             this@RegisterActivity,
                             "Please Enter Your Email",
@@ -31,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()
                 }
 
-                TextUtils.isEmpty(editTextPassword.text.toString().trim{it <= ' '}) -> {
+                TextUtils.isEmpty(editTextPasswordRegister.text.toString().trim{it <= ' '}) -> {
                     Toast.makeText(
                             this,
                             "Please Enter Your Password",
@@ -102,7 +105,7 @@ class RegisterActivity : AppCompatActivity() {
         val window = window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = Color.TRANSPARENT
-        window.statusBarColor = resources.getColor(R.color.register_bk_color)
+        window.statusBarColor = resources.getColor(R.color.black)
     }
 
     override fun onBackPressed() {

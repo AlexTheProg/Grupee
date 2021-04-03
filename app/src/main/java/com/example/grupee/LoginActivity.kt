@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         //for changing status bar icon colors   ds
         setContentView(R.layout.activity_loginrefactored)
 
+
         /*cirLoginButton.setOnClickListener {
             when{
                 TextUtils.isEmpty(editTextEmail.text.toString().trim { it <= ' '}) -> {

@@ -7,6 +7,18 @@
     android:background="@color/Alb"
     tools:context=".ui.MainActivity">
 
+    <ImageButton
+        android:id="@+id/navigationIcon"
+        android:layout_width="40dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/ivSongImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.286"
+        app:srcCompat="@drawable/ic_nav_black" />
+
     <ImageView
         android:id="@+id/ivSongImage"
         android:layout_width="300dp"
@@ -19,125 +31,124 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-       android:id="@+id/layoutPlayer"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintBottom_toBottomOf="parent">
+        android:id="@+id/layoutPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-       <TextView
-           android:id="@+id/textLyrics"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginBottom="15dp"
-           android:gravity="center"
-           android:text="@string/lyrics"
-           android:textAllCaps="true"
-           android:textColor="@color/culoarePrimaryText"
-           android:textSize="15sp"
-           android:textStyle="bold"
-           app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/textLyrics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="@string/lyrics"
+            android:textAllCaps="true"
+            android:textColor="@color/culoarePrimaryText"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-       <ImageView
-           android:id="@+id/imageLyrics"
-           android:layout_width="25dp"
-           android:layout_height="25dp"
-           android:contentDescription="@string/app_name"
-           android:src="@drawable/ic_up_lyrics"
-           app:tint="@color/culoarePrimary"
-           app:layout_constraintBottom_toTopOf="@id/textLyrics"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"/>
+        <ImageView
+            android:id="@+id/imageLyrics"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_up_lyrics"
+            app:layout_constraintBottom_toTopOf="@id/textLyrics"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/culoarePrimary" />
 
-       <ImageButton
-           android:id="@+id/ivPlayPauseDetail"
-           android:layout_width="60dp"
-           android:layout_height="60dp"
-           android:layout_marginBottom="12dp"
-           android:background="@drawable/register_btn_bg"
-           android:contentDescription="@string/app_name"
-           android:padding="12dp"
-           android:src="@drawable/ic_play"
-           android:tint="@color/Alb"
-           app:layout_constraintBottom_toTopOf="@id/imageLyrics"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.498"
-           app:layout_constraintStart_toStartOf="parent" />
+        <ImageButton
+            android:id="@+id/ivPlayPauseDetail"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/register_btn_bg"
+            android:contentDescription="@string/app_name"
+            android:padding="12dp"
+            android:src="@drawable/ic_play"
+            android:tint="@color/Alb"
+            app:layout_constraintBottom_toTopOf="@id/imageLyrics"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
-       <ImageButton
-           android:id="@+id/ivSkipPrevious"
-           android:layout_width="45dp"
-           android:layout_height="45dp"
-           android:layout_marginEnd="15dp"
-           android:background="@drawable/register_btn_bg"
-           android:contentDescription="@string/app_name"
-           android:padding="4dp"
-           android:src="@drawable/ic_skip_previous"
-           app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
-           app:layout_constraintEnd_toStartOf="@id/ivPlayPauseDetail"
-           app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail"/>
+        <ImageButton
+            android:id="@+id/ivSkipPrevious"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/register_btn_bg"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:src="@drawable/ic_skip_previous"
+            app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
+            app:layout_constraintEnd_toStartOf="@id/ivPlayPauseDetail"
+            app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail" />
 
-       <ImageButton
-           android:id="@+id/ivSkip"
-           android:layout_width="45dp"
-           android:layout_height="45dp"
-           android:layout_marginStart="15dp"
-           android:background="@drawable/register_btn_bg"
-           android:contentDescription="@string/app_name"
-           android:padding="4dp"
-           android:src="@drawable/ic_skip"
-           app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
-           app:layout_constraintStart_toEndOf="@id/ivPlayPauseDetail"
-           app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail"/>
+        <ImageButton
+            android:id="@+id/ivSkip"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/register_btn_bg"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:src="@drawable/ic_skip"
+            app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
+            app:layout_constraintStart_toEndOf="@id/ivPlayPauseDetail"
+            app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail" />
 
-       <ImageButton
-           android:id="@+id/buttonShuffle"
-           android:layout_width="30dp"
-           android:layout_height="30dp"
-           android:layout_marginStart="20dp"
-           android:background="@null"
-           android:contentDescription="@string/app_name"
-           android:src="@drawable/ic_shuffle"
-           app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail"
-           app:layout_constraintVertical_bias="1.0" />
+        <ImageButton
+            android:id="@+id/buttonShuffle"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_shuffle"
+            app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail"
+            app:layout_constraintVertical_bias="1.0" />
 
-       <ImageButton
-           android:id="@+id/buttonRepeat"
-           android:layout_width="30dp"
-           android:layout_height="30dp"
-           android:layout_marginEnd="20dp"
-           android:background="@null"
-           android:contentDescription="@string/app_name"
-           android:src="@drawable/ic_repeat"
-           app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail"
-           app:layout_constraintVertical_bias="1.0" />
+        <ImageButton
+            android:id="@+id/buttonRepeat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_repeat"
+            app:layout_constraintBottom_toBottomOf="@id/ivPlayPauseDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivPlayPauseDetail"
+            app:layout_constraintVertical_bias="1.0" />
 
-       <SeekBar
-           android:id="@+id/seekBar"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="25dp"
-           android:layout_marginEnd="20dp"
-           android:layout_marginBottom="15dp"
-           android:progress="30"
-           android:theme="@style/SeekBarTheme"
-           app:layout_constraintBottom_toTopOf="@id/ivPlayPauseDetail"/>
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
+            android:progress="30"
+            android:theme="@style/SeekBarTheme"
+            app:layout_constraintBottom_toTopOf="@id/ivPlayPauseDetail" />
 
-       <com.google.android.material.textview.MaterialTextView
-           android:id="@+id/tvArtistName"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/artist_name"
-           android:textColor="@color/black"
-           android:textSize="15sp"
-           android:padding="5dp"
-           android:layout_marginStart="5dp"
-           app:layout_constraintBottom_toTopOf="@+id/seekBar"
-           app:layout_constraintStart_toStartOf="@+id/seekBar"
-           />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvArtistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:text="@string/artist_name"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/seekBar"
+            app:layout_constraintStart_toStartOf="@+id/seekBar" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSongName"
