@@ -49,4 +49,5 @@
     <color name="culoareStroke">#BDBDBD</color>
     <color name="culoareHint">#ECECEC</color>
     <color name="culoareLikeButton">#DC143C</color>
+    <color name="darkBackground">#202020</color>
 </resources>

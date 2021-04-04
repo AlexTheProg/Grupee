@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Alb"
+    android:background="#303030"
     tools:context=".ui.MainActivity">
 
     <ImageButton
@@ -12,7 +12,7 @@
         android:layout_width="40dp"
         android:layout_height="44dp"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="#fff"
+        android:backgroundTint="#303030"
         app:layout_constraintBottom_toTopOf="@+id/ivSongImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +44,7 @@
             android:gravity="center"
             android:text="@string/lyrics"
             android:textAllCaps="true"
-            android:textColor="@color/culoarePrimaryText"
+            android:textColor="#fff"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toTopOf="@id/textLyrics"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/culoarePrimary" />
+             />
 
         <ImageButton
             android:id="@+id/ivPlayPauseDetail"
@@ -145,7 +145,7 @@
             android:layout_marginStart="5dp"
             android:padding="5dp"
             android:text="@string/artist_name"
-            android:textColor="@color/black"
+            android:textColor="#fff"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/seekBar"
             app:layout_constraintStart_toStartOf="@+id/seekBar" />
@@ -157,7 +157,7 @@
             android:paddingTop="25dp"
 
             android:text="@string/song_name"
-            android:textColor="@color/black"
+            android:textColor="#fff"
             android:textSize="25sp"
             android:textStyle="bold"
 
@@ -169,16 +169,16 @@
             android:id="@+id/likeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/Alb"
             android:clickable="true"
             android:focusable="true"
+            android:backgroundTint="#303030"
             android:src="@drawable/ic_favorite_unliked"
             app:layout_constraintBottom_toTopOf="@id/seekBar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.848"
+            app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintStart_toStartOf="@+id/seekBar"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.461" />
+            app:layout_constraintVertical_bias="0.457" />
 
         <TextView
             android:id="@+id/tvCurTime"
@@ -188,7 +188,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="2dp"
             android:text="@string/_00_00"
-            android:textColor="@color/culoarePrimaryText"
+            android:textColor="#fff"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/ivSkipPrevious"
             app:layout_constraintStart_toStartOf="@id/seekBar"
@@ -203,7 +203,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:text="@string/_00_00"
-            android:textColor="@color/culoarePrimaryText"
+            android:textColor="#fff"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/ivSkip"
             app:layout_constraintEnd_toEndOf="@id/seekBar"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#303030"
     tools:context=".ui.MainActivity">
 
 
@@ -24,12 +25,14 @@
         android:layout_width="wrap_content"/>
 
     <ImageButton
+
         android:id="@+id/navigationIcon"
-        android:backgroundTint="#000"
+
         app:layout_constraintBottom_toBottomOf="@id/sectionTitle"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintLeft_toRightOf="@+id/sectionTitle"
         app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="#303030"
         app:layout_constraintTop_toTopOf="@+id/sectionTitle"
         app:srcCompat="@drawable/ic_nav"
         android:layout_height="wrap_content"
