@@ -42,27 +42,10 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()
                 }
 
-                TextUtils.isEmpty(editTextName.text.toString().trim{it <= ' '}) -> {
-                    Toast.makeText(
-                            this,
-                            "Please Enter Your Name",
-                            Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                TextUtils.isEmpty(editTextMobile.text.toString().trim{it <=' '}) -> {
-                    Toast.makeText(
-                            this,
-                            "Please Enter Your Phone Number",
-                            Toast.LENGTH_SHORT
-                    ).show()
-                }
 
                 else -> {
-                    val email: String = editTextEmail.text.toString().trim{it <= ' '}
-                    val name : String = editTextName.text.toString().trim { it <= ' '}
-                    val phoneNumber: String = editTextMobile.text.toString().trim{ it <= ' '}
-                    val password: String = editTextPassword.text.toString().trim { it <= ' '}
+                    val email: String = editTextUsernameRegister.text.toString().trim{it <= ' '}
+                    val password: String = editTextPasswordRegister.text.toString().trim { it <= ' '}
 
                     //Create an instance and register a user with email and password
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)

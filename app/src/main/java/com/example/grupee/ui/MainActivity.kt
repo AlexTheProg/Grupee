@@ -1,14 +1,18 @@
 package com.example.grupee.ui
 
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.RequestManager
+import com.example.grupee.LoginActivity
 import com.example.grupee.R
 import com.example.grupee.adapters.SwipeSongAdapter
 import com.example.grupee.exoplayer.isPlaying
@@ -17,8 +21,13 @@ import com.example.grupee.model.Song
 import com.example.grupee.other.Status
 import com.example.grupee.ui.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,6 +42,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var glide: RequestManager
 
     private var curPlayingSong: Song? = null
+
+    private var firebaseAuth: FirebaseAuth? = null
 
     private var playbackState: PlaybackStateCompat? = null
 
@@ -53,6 +64,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+
 
         ivPlayPause.setOnClickListener {
             curPlayingSong?.let {
@@ -83,6 +96,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun hideBottomBar() {
         ivCurSongImage.isVisible = false
@@ -169,6 +183,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 }
 
 

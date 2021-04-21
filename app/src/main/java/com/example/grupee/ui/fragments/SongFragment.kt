@@ -38,7 +38,6 @@ class SongFragment : Fragment(R.layout.fragment_song) {
 
     private var shouldUpdateSeekbar = true
 
-    private var liked: Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -87,8 +86,6 @@ class SongFragment : Fragment(R.layout.fragment_song) {
     private fun updateTitleAndSongImage(song: Song) {
         val artistName = song.artist
         val songName = song.title
-        /*val title = "${song.title} - ${song.artist}"
-        tvSongName.text = title*/
         tvArtistName.text = artistName
         tvSongName.text = songName
 

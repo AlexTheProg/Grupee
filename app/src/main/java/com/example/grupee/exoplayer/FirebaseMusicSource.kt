@@ -27,7 +27,7 @@ class FirebaseMusicSource @Inject constructor(
         state = State.STATE_INITIALIZING
         val allSongs = musicDatabase.getAllSongs()
         songs = allSongs.map{song ->
-            MediaMetadataCompat.Builder()
+            Builder()
                     .putString(METADATA_KEY_ARTIST, song.artist)
                     .putString(METADATA_KEY_MEDIA_ID, song.mediaId)
                     .putString(METADATA_KEY_TITLE, song.title)

@@ -1,6 +1,7 @@
 package com.example.grupee
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -11,18 +12,29 @@ import com.example.grupee.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.cirLoginButton
+import kotlinx.android.synthetic.main.activity_login.editTextEmail
+import kotlinx.android.synthetic.main.activity_loginrefactored.*
 
 class LoginActivity : AppCompatActivity() {
-    private var loginButton: Button? = null
+
+
+    lateinit var sharedPref: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //for changing status bar icon colors   ds
         setContentView(R.layout.activity_loginrefactored)
 
+        sharedPref = this.getSharedPreferences("LOGIN", MODE_PRIVATE)
 
-        /*cirLoginButton.setOnClickListener {
+        if(sharedPref.getBoolean("logged", false)){
+            goToMainActivity(cirLoginButton)
+        }
+
+        cirLoginButton.setOnClickListener {
             when{
-                TextUtils.isEmpty(editTextEmail.text.toString().trim { it <= ' '}) -> {
+                TextUtils.isEmpty(editTextEmailLogin.text.toString().trim { it <= ' '}) -> {
                     Toast.makeText(
                             this@LoginActivity,
                             "Wrong email",
@@ -30,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                 }
 
-                TextUtils.isEmpty(editTextPassword.text.toString().trim { it <= ' '}) -> {
+                TextUtils.isEmpty(editTextPasswordLogin.text.toString().trim { it <= ' '}) -> {
                     Toast.makeText(
                             this@LoginActivity,
                             "Wrong Password",
@@ -39,8 +51,8 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    val email: String = editTextEmail.text.toString().trim { it <= ' '}
-                    val password: String = editTextPassword.text.toString().trim { it <= ' '}
+                    val email: String = editTextEmailLogin.text.toString().trim { it <= ' '}
+                    val password: String = editTextPasswordLogin.text.toString().trim { it <= ' '}
 
                     //Log-In using FirebaseAuth
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
@@ -54,10 +66,13 @@ class LoginActivity : AppCompatActivity() {
                                             Toast.LENGTH_SHORT
                                     ).show()
 
+                                    sharedPref.edit().putBoolean("logged", true).apply()
                                     val intent =
-                                            Intent(this@LoginActivity, WelcomeUserHomeActivity::class.java)
+                                            Intent(this@LoginActivity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    intent.putExtra("username", firebaseUser.displayName)
+
 
                                 }else{
                                     Toast.makeText(
@@ -71,9 +86,10 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             }
-        }*/
+        }
 
     }
+
 
     fun goToMainActivity(view: View?) {
         startActivity(Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
@@ -85,7 +101,4 @@ class LoginActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_right, R.anim.stay)
     }
 
-    override fun onBackPressed() {
-        moveTaskToBack(true)
-    }
 }
