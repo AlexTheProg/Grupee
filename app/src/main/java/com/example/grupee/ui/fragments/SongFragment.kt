@@ -3,6 +3,7 @@ import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -79,9 +80,11 @@ class SongFragment : Fragment(R.layout.fragment_song) {
 
 
         likeButton.setOnClickListener {
-            mainViewModel.likeSong(likeButton)
+            mainViewModel.curPlayingSong.value?.toSong()?.let { it1 -> mainViewModel.likeSong(likeButton, mediaItem = it1) }
         }
     }
+
+
 
     private fun updateTitleAndSongImage(song: Song) {
         val artistName = song.artist
