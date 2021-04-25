@@ -8,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.grupee.R
 import com.example.grupee.adapters.SwipeSongAdapter
 import com.example.grupee.exoplayer.MusicServiceConnection
+import com.example.grupee.model.LikedSongsDatabase
 import dagger.*
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
@@ -24,6 +25,7 @@ object AppModule {
     fun provideMusicServiceConnection(
             @ApplicationContext context: Context
     ) = MusicServiceConnection(context)
+
 
     @Singleton
     @Provides
