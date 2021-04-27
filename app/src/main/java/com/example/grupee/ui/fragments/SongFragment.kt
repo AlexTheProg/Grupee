@@ -1,7 +1,6 @@
 package com.example.grupee.ui.fragments
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.SeekBar
@@ -20,6 +19,10 @@ import com.example.grupee.ui.viewmodels.SongViewModel
 
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -38,6 +41,11 @@ class SongFragment : Fragment(R.layout.fragment_song) {
     private var playbackState: PlaybackStateCompat? = null
 
     private var shouldUpdateSeekbar = true
+
+
+
+    private val serviceJob = Job()
+    private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,10 +88,9 @@ class SongFragment : Fragment(R.layout.fragment_song) {
 
 
         likeButton.setOnClickListener {
-            mainViewModel.curPlayingSong.value?.toSong()?.let { it1 -> mainViewModel.likeSong(likeButton, mediaItem = it1) }
+            serviceScope.launch { curPlayingSong?.let { it1 -> mainViewModel.likeSong(likeButton, it1) } }
         }
     }
-
 
 
     private fun updateTitleAndSongImage(song: Song) {
@@ -104,6 +111,7 @@ class SongFragment : Fragment(R.layout.fragment_song) {
                             if(curPlayingSong == null && songs.isNotEmpty()) {
                                 curPlayingSong = songs[0]
                                 updateTitleAndSongImage(songs[0])
+
                             }
                         }
                     }
@@ -111,11 +119,17 @@ class SongFragment : Fragment(R.layout.fragment_song) {
                 }
             }
         }
+
+
+
         mainViewModel.curPlayingSong.observe(viewLifecycleOwner) {
             if(it == null) return@observe
             curPlayingSong = it.toSong()
             updateTitleAndSongImage(curPlayingSong!!)
         }
+
+
+
         mainViewModel.playbackState.observe(viewLifecycleOwner) {
             playbackState = it
             ivPlayPauseDetail.setImageResource(

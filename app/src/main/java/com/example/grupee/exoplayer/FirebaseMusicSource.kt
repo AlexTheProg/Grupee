@@ -21,11 +21,13 @@ class FirebaseMusicSource @Inject constructor(
 ){
 
     var songs = emptyList<MediaMetadataCompat>()
+    var likedSongs = emptyList<MediaMetadataCompat>()
 
     @InternalCoroutinesApi
     suspend fun fetchMediaData() = withContext(Dispatchers.IO){
         state = State.STATE_INITIALIZING
         val allSongs = musicDatabase.getAllSongs()
+        val allLikedSongs = musicDatabase.getLikedSongs()
         songs = allSongs.map{song ->
             Builder()
                     .putString(METADATA_KEY_ARTIST, song.artist)
@@ -39,6 +41,21 @@ class FirebaseMusicSource @Inject constructor(
                     .putString(METADATA_KEY_DISPLAY_DESCRIPTION, song.artist)
                     .build()
         }
+
+        likedSongs = allLikedSongs.map { song ->
+            Builder()
+                    .putString(METADATA_KEY_ARTIST, song.artist)
+                    .putString(METADATA_KEY_MEDIA_ID, song.mediaId)
+                    .putString(METADATA_KEY_TITLE, song.title)
+                    .putString(METADATA_KEY_DISPLAY_TITLE, song.title)
+                    .putString(METADATA_KEY_DISPLAY_ICON_URI, song.imageURL)
+                    .putString(METADATA_KEY_MEDIA_URI, song.songURL)
+                    .putString(METADATA_KEY_ALBUM_ART_URI, song.imageURL)
+                    .putString(METADATA_KEY_DISPLAY_SUBTITLE, song.artist)
+                    .putString(METADATA_KEY_DISPLAY_DESCRIPTION, song.artist)
+                    .build()
+        }
+
         state = State.STATE_INITIALIZED
     }
 
@@ -48,6 +65,11 @@ class FirebaseMusicSource @Inject constructor(
             val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
                     .createMediaSource(song.getString(METADATA_KEY_MEDIA_URI).toUri())
             concatenatingMediaSource.addMediaSource(mediaSource)
+        }
+        likedSongs.forEach{song ->
+            val mediaSourceLikedSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                    .createMediaSource(song.getString(METADATA_KEY_MEDIA_URI).toUri())
+
         }
         return concatenatingMediaSource
     }
