@@ -29,7 +29,7 @@ class MusicServiceConnection(
 
     private val _curPlayingSong = MutableLiveData<MediaMetadataCompat?>()
     val curPlayingSong: LiveData<MediaMetadataCompat?> = _curPlayingSong
-    
+
     lateinit var mediaController: MediaControllerCompat
 
     private val mediaBrowserConnectionCallback = MediaBrowserConnectionCallback(context)
@@ -52,6 +52,8 @@ class MusicServiceConnection(
     }
 
     fun unsubscribe(parentId: String, callback: MediaBrowserCompat.SubscriptionCallback) {
+        _curPlayingSong.postValue(null)
+
         mediaBrowser.unsubscribe(parentId, callback)
     }
 
@@ -113,20 +115,3 @@ class MusicServiceConnection(
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

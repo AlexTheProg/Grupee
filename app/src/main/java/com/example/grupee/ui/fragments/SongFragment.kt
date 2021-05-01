@@ -1,8 +1,8 @@
 package com.example.grupee.ui.fragments
+
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
-import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +13,7 @@ import com.example.grupee.R
 import com.example.grupee.exoplayer.isPlaying
 import com.example.grupee.exoplayer.toSong
 import com.example.grupee.model.Song
+import com.example.grupee.other.PersonalizedSongsPref
 import com.example.grupee.other.Status
 import com.example.grupee.ui.viewmodels.MainViewModel
 import com.example.grupee.ui.viewmodels.SongViewModel
@@ -31,6 +32,9 @@ import javax.inject.Inject
 class SongFragment : Fragment(R.layout.fragment_song) {
 
     @Inject
+    lateinit var personalizedSongsPref: PersonalizedSongsPref
+
+    @Inject
     lateinit var glide: RequestManager
 
     private lateinit var mainViewModel: MainViewModel
@@ -42,15 +46,19 @@ class SongFragment : Fragment(R.layout.fragment_song) {
 
     private var shouldUpdateSeekbar = true
 
-
+    private var likedSongsMediaIds = HashSet<String>()
 
     private val serviceJob = Job()
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
+        // Get liked songs from PersonalizedSongsPref.
+        likedSongsMediaIds = personalizedSongsPref.getLikedSongs() as HashSet<String>
+
         subscribeToObservers()
 
         ivPlayPauseDetail.setOnClickListener {
@@ -61,7 +69,7 @@ class SongFragment : Fragment(R.layout.fragment_song) {
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(fromUser) {
+                if (fromUser) {
                     setCurPlayerTimeToTextView(progress.toLong())
                 }
             }
@@ -102,16 +110,28 @@ class SongFragment : Fragment(R.layout.fragment_song) {
         glide.load(song.imageURL).into(ivSongImage)
     }
 
+    private fun updateLikeStatus(song: Song) {
+        when {
+            song.liked -> likeButton.setImageResource(R.drawable.ic_favorite_liked)
+            else -> likeButton.setImageResource(R.drawable.ic_favorite_unliked)
+        }
+    }
+
     private fun subscribeToObservers() {
         mainViewModel.mediaItems.observe(viewLifecycleOwner) {
             it.let { result ->
-                when(result.status) {
+                when (result.status) {
                     Status.SUCCESS -> {
                         result.data?.let { songs ->
-                            if(curPlayingSong == null && songs.isNotEmpty()) {
+                            if (curPlayingSong == null && songs.isNotEmpty()) {
                                 curPlayingSong = songs[0]
-                                updateTitleAndSongImage(songs[0])
+                                updateTitleAndSongImage(curPlayingSong!!)
 
+                                curPlayingSong?.apply {
+                                    liked = likedSongsMediaIds.contains(mediaId)
+                                }
+
+                                updateLikeStatus(curPlayingSong!!)
                             }
                         }
                     }
@@ -120,29 +140,37 @@ class SongFragment : Fragment(R.layout.fragment_song) {
             }
         }
 
-
-
         mainViewModel.curPlayingSong.observe(viewLifecycleOwner) {
-            if(it == null) return@observe
+            if (it == null) {
+                curPlayingSong = null
+                return@observe
+            }
+
             curPlayingSong = it.toSong()
             updateTitleAndSongImage(curPlayingSong!!)
+
+            curPlayingSong?.apply {
+                liked = likedSongsMediaIds.contains(mediaId)
+            }
+
+            updateLikeStatus(curPlayingSong!!)
         }
-
-
 
         mainViewModel.playbackState.observe(viewLifecycleOwner) {
             playbackState = it
             ivPlayPauseDetail.setImageResource(
-                    if(playbackState?.isPlaying == true) R.drawable.ic_pause else R.drawable.ic_play
+                if (playbackState?.isPlaying == true) R.drawable.ic_pause else R.drawable.ic_play
             )
             seekBar.progress = it?.position?.toInt() ?: 0
         }
+
         songViewModel.curPlayerPosition.observe(viewLifecycleOwner) {
-            if(shouldUpdateSeekbar) {
+            if (shouldUpdateSeekbar) {
                 seekBar.progress = it.toInt()
                 setCurPlayerTimeToTextView(it)
             }
         }
+
         songViewModel.curSongDuration.observe(viewLifecycleOwner) {
             seekBar.max = it.toInt()
             val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
@@ -155,25 +183,3 @@ class SongFragment : Fragment(R.layout.fragment_song) {
         tvCurTime.text = dateFormat.format(ms)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

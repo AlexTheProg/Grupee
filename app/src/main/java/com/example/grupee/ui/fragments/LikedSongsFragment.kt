@@ -1,35 +1,27 @@
 package com.example.grupee.ui.fragments
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.grupee.LoginActivity
 import com.example.grupee.R
 import com.example.grupee.adapters.SongAdapter
-import com.example.grupee.other.Constants.MEDIA_ROOT_ID
+import com.example.grupee.other.Constants.MEDIA_LIKED_SONGS_ID
 import com.example.grupee.other.Status
 import com.example.grupee.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_liked_songs.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class LikedSongsFragment : Fragment(R.layout.fragment_liked_songs) {
 
     lateinit var mainViewModel: MainViewModel
 
     @Inject
     lateinit var songAdapter: SongAdapter
-
-    lateinit var sharePref: SharedPreferences
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,41 +31,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView()
         subscribeToObservers()
 
-        if (mainViewModel.parentId != MEDIA_ROOT_ID) {
+        if (mainViewModel.parentId != MEDIA_LIKED_SONGS_ID) {
             mainViewModel.unsubscribeMusicService()
-            mainViewModel.subscribeMusicService(MEDIA_ROOT_ID)
+            mainViewModel.subscribeMusicService(MEDIA_LIKED_SONGS_ID)
         }
 
         songAdapter.setItemClickListener {
             mainViewModel.playOrToggleSong(it)
         }
-
-        logOut.setOnClickListener {
-            mainViewModel.logout(logOut)
-            sharePref = activity?.getSharedPreferences("LOGIN", Context.MODE_PRIVATE) ?: sharePref
-            sharePref.edit().clear().apply()
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
     }
 
-    private fun setupRecyclerView() = rvAllSongs.apply {
-        adapter = songAdapter
-        layoutManager = LinearLayoutManager(requireContext())
+    private fun setupRecyclerView() {
+        rvLikedSongs.adapter = songAdapter
     }
 
     private fun subscribeToObservers() {
         mainViewModel.mediaItems.observe(viewLifecycleOwner) { result ->
             when (result.status) {
                 Status.SUCCESS -> {
-                    allSongsProgressBar.isVisible = false
+                    likedSongsProgressBar.isVisible = false
                     result.data?.let { songs ->
                         songAdapter.songs = songs
                     }
                 }
                 Status.ERROR -> Unit
-                Status.LOADING -> allSongsProgressBar.isVisible = true
+                Status.LOADING -> likedSongsProgressBar.isVisible = true
             }
         }
     }

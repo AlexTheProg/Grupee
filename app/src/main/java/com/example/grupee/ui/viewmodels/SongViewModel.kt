@@ -1,6 +1,5 @@
 package com.example.grupee.ui.viewmodels
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,17 +26,15 @@ class SongViewModel @Inject constructor(
     private val _curPlayerPosition = MutableLiveData<Long>()
     val curPlayerPosition: LiveData<Long> = _curPlayerPosition
 
-
-
     init {
         updateCurrentPlayerPosition()
     }
 
     private fun updateCurrentPlayerPosition() {
         viewModelScope.launch {
-            while(true) {
+            while (true) {
                 val pos = playbackState.value?.currentPlaybackPosition
-                if(curPlayerPosition.value != pos) {
+                if (curPlayerPosition.value != pos) {
                     _curPlayerPosition.postValue(pos!!)
                     _curSongDuration.postValue(MusicService.curSongDuration)
                 }
@@ -46,22 +43,3 @@ class SongViewModel @Inject constructor(
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

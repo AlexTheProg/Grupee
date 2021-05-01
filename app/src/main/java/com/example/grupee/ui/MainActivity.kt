@@ -1,18 +1,15 @@
 package com.example.grupee.ui
 
-import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
-import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.RequestManager
-import com.example.grupee.LoginActivity
 import com.example.grupee.R
 import com.example.grupee.adapters.SwipeSongAdapter
 import com.example.grupee.exoplayer.isPlaying
@@ -20,10 +17,8 @@ import com.example.grupee.exoplayer.toSong
 import com.example.grupee.model.Song
 import com.example.grupee.other.Status
 import com.example.grupee.ui.viewmodels.MainViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -43,8 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     private var curPlayingSong: Song? = null
 
-    private var firebaseAuth: FirebaseAuth? = null
-
     private var playbackState: PlaybackStateCompat? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +45,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         subscribeToObservers()
 
+        /**
+         * Setup NavController with BottomNavigationView
+         * Please ensure fragment id in navGraph matches with menu id in bottom navigation menu
+         */
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.navigationBar)
+        NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.findNavController())
+
         vpSong.adapter = swipeSongAdapter
 
         vpSong.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if(playbackState?.isPlaying == true) {
+                if (playbackState?.isPlaying == true) {
                     mainViewModel.playOrToggleSong(swipeSongAdapter.songs[position])
                 } else {
                     curPlayingSong = swipeSongAdapter.songs[position]
                 }
             }
         })
-
-
 
         ivPlayPause.setOnClickListener {
             curPlayingSong?.let {
@@ -80,15 +78,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
+            when (destination.id) {
 
                 R.id.songFragment -> {
                     hideBottomBar()
                     hideNavBar()
                 }
                 R.id.homeFragment -> {
-                        showBottomBar()
-                        showNavBar()}
+                    showBottomBar()
+                    showNavBar()
+                }
                 else -> {
                     showBottomBar()
                     showNavBar()
@@ -104,11 +103,11 @@ class MainActivity : AppCompatActivity() {
         ivPlayPause.isVisible = false
     }
 
-    private fun hideNavBar(){
+    private fun hideNavBar() {
         navigationBar.isVisible = false
     }
 
-    private fun showNavBar(){
+    private fun showNavBar() {
         navigationBar.isVisible = true
     }
 
@@ -128,7 +127,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun subscribeToObservers() {
         mainViewModel.mediaItems.observe(this) {
-            it?.let { result ->
+            it.let { result ->
                 when (result.status) {
                     Status.SUCCESS -> {
                         result.data?.let { songs ->
@@ -137,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                                 glide.load((curPlayingSong ?: songs[0]).imageURL)
                                     .into(ivCurSongImage)
                             }
-                            switchViewPagerToCurrentSong(curPlayingSong ?: return@observe)
+                            switchViewPagerToCurrentSong(curPlayingSong ?: songs[0])
                         }
                     }
                     Status.ERROR -> Unit
@@ -145,19 +144,27 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        mainViewModel.curPlayingSong.observe(this) {
-            if (it == null) return@observe
 
-            curPlayingSong = it.toSong()
-            glide.load(curPlayingSong?.imageURL).into(ivCurSongImage)
-            switchViewPagerToCurrentSong(curPlayingSong ?: return@observe)
+        mainViewModel.curPlayingSong.observe(this) {
+            when (it) {
+                null -> {
+                    curPlayingSong = null
+                }
+                else -> {
+                    curPlayingSong = it.toSong()
+                    glide.load(curPlayingSong?.imageURL).into(ivCurSongImage)
+                    switchViewPagerToCurrentSong(curPlayingSong ?: return@observe)
+                }
+            }
         }
+
         mainViewModel.playbackState.observe(this) {
             playbackState = it
             ivPlayPause.setImageResource(
                 if (playbackState?.isPlaying == true) R.drawable.ic_pause else R.drawable.ic_play
             )
         }
+
         mainViewModel.isConnected.observe(this) {
             it?.getContentIfNotHandled()?.let { result ->
                 when (result.status) {
@@ -170,6 +177,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         mainViewModel.networkError.observe(this) {
             it?.getContentIfNotHandled()?.let { result ->
                 when (result.status) {
@@ -184,29 +192,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
