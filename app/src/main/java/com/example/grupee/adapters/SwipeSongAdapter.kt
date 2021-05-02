@@ -5,9 +5,7 @@ import com.example.grupee.R
 import kotlinx.android.synthetic.main.swipe_item.view.*
 
 
-
 class SwipeSongAdapter : BaseSongAdapter(R.layout.swipe_item) {
-
 
     override val differ = AsyncListDiffer(this, diffCallback)
 
@@ -24,24 +22,4 @@ class SwipeSongAdapter : BaseSongAdapter(R.layout.swipe_item) {
             }
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
