@@ -75,6 +75,20 @@ class FirebaseMusicSource @Inject constructor(
         state = State.STATE_INITIALIZED
     }
 
+    // Check whether liked songs updated.
+    // If yes, re-prepare liked songs list.
+    fun checkLikedSongs() {
+        if (personalizedSongsPref.areLikedSongsUpdated()) onLikedSongsUpdated()
+    }
+
+    // Re-prepare liked songs list by getting latest liked songs from PersonalizedSongsPref.
+    private fun onLikedSongsUpdated() {
+        val latestLikedSongs = personalizedSongsPref.getLikedSongs() ?: hashSetOf()
+        likedSongs = songs.filter { it.getString(METADATA_KEY_MEDIA_ID) in latestLikedSongs }
+
+        personalizedSongsPref.resetLikedSongsUpdated()
+    }
+
     fun asMediaSource(dataSourceFactory: DefaultDataSourceFactory,
                       parentId: String = Constants.MEDIA_ROOT_ID):
         ConcatenatingMediaSource {

@@ -40,12 +40,6 @@ class MainViewModel @Inject constructor(
     private val _mediaItems = MutableLiveData<Resource<List<Song>>>()
     val mediaItems: LiveData<Resource<List<Song>>> = _mediaItems
 
-    private val _allSongsItems = MutableLiveData<Resource<List<Song>>>()
-    val allSongsItems: LiveData<Resource<List<Song>>> = _allSongsItems
-
-    private val _likedSongsItems = MutableLiveData<Resource<List<Song>>>()
-    val likedSongsItems: LiveData<Resource<List<Song>>> = _likedSongsItems
-
     val isConnected = musicServiceConnection.isConnected
     val networkError = musicServiceConnection.networkError
     val curPlayingSong = musicServiceConnection.curPlayingSong
@@ -53,7 +47,6 @@ class MainViewModel @Inject constructor(
 
     var parentId: String = MEDIA_ROOT_ID
 
-    var likedSongsList: MutableList<String>? = null
     private val mFirebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     init {

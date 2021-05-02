@@ -7,6 +7,7 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.util.Log
 import androidx.media.MediaBrowserServiceCompat
 import com.example.grupee.exoplayer.callbacks.MusicPlaybackPreparer
 import com.example.grupee.exoplayer.callbacks.MusicPlayerEventListener
@@ -168,6 +169,9 @@ class MusicService : MediaBrowserServiceCompat() {
 
     @InternalCoroutinesApi
     override fun onLoadChildren(parentId: String, result: Result<MutableList<MediaBrowserCompat.MediaItem>>) {
+        // Check whether liked songs updated.
+        firebaseMusicSource.checkLikedSongs()
+
         this.parentId = parentId
 
         setupMusicPlaybackPreparer()

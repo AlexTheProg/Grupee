@@ -15,6 +15,7 @@ import com.example.grupee.adapters.SwipeSongAdapter
 import com.example.grupee.exoplayer.isPlaying
 import com.example.grupee.exoplayer.toSong
 import com.example.grupee.model.Song
+import com.example.grupee.other.PersonalizedSongsPref
 import com.example.grupee.other.Status
 import com.example.grupee.ui.viewmodels.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,6 +28,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var personalizedSongsPref: PersonalizedSongsPref
 
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -45,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         subscribeToObservers()
 
+        // Reset liked songs updated in PersonalizedSongsPref.
+        personalizedSongsPref.resetLikedSongsUpdated()
+
         /**
          * Setup NavController with BottomNavigationView
          * Please ensure fragment id in navGraph matches with menu id in bottom navigation menu
@@ -59,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 super.onPageSelected(position)
                 if (playbackState?.isPlaying == true) {
                     mainViewModel.playOrToggleSong(swipeSongAdapter.songs[position])
-                } else {
+                } else if (swipeSongAdapter.songs.size > position){
                     curPlayingSong = swipeSongAdapter.songs[position]
                 }
             }
@@ -135,8 +142,8 @@ class MainActivity : AppCompatActivity() {
                             if (songs.isNotEmpty()) {
                                 glide.load((curPlayingSong ?: songs[0]).imageURL)
                                     .into(ivCurSongImage)
+                                switchViewPagerToCurrentSong(curPlayingSong ?: songs[0])
                             }
-                            switchViewPagerToCurrentSong(curPlayingSong ?: songs[0])
                         }
                     }
                     Status.ERROR -> Unit
