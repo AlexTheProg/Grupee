@@ -14,4 +14,7 @@
     <string name="songs">Songs</string>
     <string name="playlists">Playlists</string>
     <string name="search">Search</string>
+
+    <!-- Liked Songs Fragment -->
+    <string name="title_liked_songs">Liked Songs</string>
 </resources>
